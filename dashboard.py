@@ -15,10 +15,10 @@ def create_chart(data: pd.DataFrame):
 def main():
     st.title("Stock Dashboard")
 
-    ticker = st.text_input("Enter the stock ticker:", value="AAPL")
+    ticker1 = st.text_input("Enter the stock ticker:", value="AAPL")
 
-    if ticker:
-        data = get_stock_data(ticker)
+    if ticker1:
+        data = get_stock_data(ticker1)
         data = calculate_percente_change(data)
 
         # display the latest closing price and its percentage change
@@ -28,6 +28,20 @@ def main():
         # display chart
         chart = create_chart(data)
         st.plotly_chart(chart)
+    
+    ticker2 = st.text_input("Enter the stock ticker:", value="BRK-B")
 
+    if ticker2:
+        data = get_stock_data(ticker2)
+        data = calculate_percente_change(data)
+
+        # display the latest closing price and its percentage change
+        st.write("Last Price:", data["Close"].iloc[-1])
+        st.write("Percentage Change:", data["Percentage Change"].iloc[-1])
+
+        # display chart
+        chart = create_chart(data)
+        st.plotly_chart(chart)
+        
 if __name__ == "__main__":
     main()
