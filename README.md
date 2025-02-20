@@ -48,4 +48,4 @@ How to get in contact with me:
 [3.2]: https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/linkedin-3-16.png
 [3]: https://www.linkedin.com/in/thiago-pereira-goncalves/
 
-Project Link: [https://github.com/thpgoncalves/bill-scanner](https://github.com/thpgoncalves/Bill-Scanner-Gemini-API)
+Project Link: [https://github.com/thpgoncalves/stock-dashboard](https://github.com/thpgoncalves/stock-dashboard)
