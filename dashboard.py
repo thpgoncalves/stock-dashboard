@@ -15,33 +15,33 @@ def create_chart(data: pd.DataFrame):
 def main():
     st.title("Stock Dashboard")
 
-    ticker1 = st.text_input("Enter the stock ticker:", value="AAPL")
+    col1, col2 = st.columns(2) # creating columns to put the graphics side by side
 
-    if ticker1:
-        data = get_stock_data(ticker1)
-        data = calculate_percente_change(data)
+    with col1:
+        ticker1 = st.text_input("Enter the stock ticker:", value="BERK34.SA")
 
-        # display the latest closing price and its percentage change
-        st.write("Last Price:", data["Close"].iloc[-1])
-        st.write("Percentage Change:", data["Percentage Change"].iloc[-1])
+        if ticker1:
+            data1 = get_stock_data(ticker1)
+            percent_change1 = calculate_percente_change(data1)
 
-        # display chart
-        chart = create_chart(data)
-        st.plotly_chart(chart)
+            st.write(f"**{ticker1} Last Price:**", data1["Close"].iloc[-1])
+            st.write(f"**{ticker1} Percent Change:**", percent_change1)
+
+            chart1 = create_chart(data1)
+            st.plotly_chart(chart1, use_container_width=True)
     
-    ticker2 = st.text_input("Enter the stock ticker:", value="BRK-B")
+    with col2:
+        ticker2 = st.text_input("Enter the stock ticker:", value="IVVB11.SA")
 
-    if ticker2:
-        data = get_stock_data(ticker2)
-        data = calculate_percente_change(data)
+        if ticker2:
+            data2 = get_stock_data(ticker2)
+            percent_change2 = calculate_percente_change(data2)
 
-        # display the latest closing price and its percentage change
-        st.write("Last Price:", data["Close"].iloc[-1])
-        st.write("Percentage Change:", data["Percentage Change"].iloc[-1])
+            st.write(f"**{ticker2} Last Price:**", data2["Close"].iloc[-1])
+            st.write(f"**{ticker2} Percent Change:**", percent_change2)
 
-        # display chart
-        chart = create_chart(data)
-        st.plotly_chart(chart)
-        
+            chart2 = create_chart(data2)
+            st.plotly_chart(chart2, use_container_width=True)
+
 if __name__ == "__main__":
     main()

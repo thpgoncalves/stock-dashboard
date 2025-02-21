@@ -6,5 +6,7 @@ def calculate_percente_change(data: pd.DataFrame) -> pd.DataFrame:
     """
 
     data = data.copy()
-    data["Percentage Change"] = data["Close"].pct_change() * 100
-    return data
+
+    percent_change = ((data['Close'].iloc[-1] - data['Open'].iloc[0])/data['Open'].iloc[0]) * 100
+
+    return f"{percent_change:.2f}%"
