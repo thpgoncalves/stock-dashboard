@@ -19,9 +19,11 @@ def main():
 
     with col1:
         ticker1 = st.text_input("Enter the stock ticker:", value="BERK34.SA")
+        period1 = st.text_input("Enter the period (e.g., '1d', '1mo', '1y', 'max'):", value="1d", key="period1")
+        interval1 = st.text_input("Enter the interval(e.g., '1m', '5m', '1h', '1d'):", value="1m", key="interval1")
 
         if ticker1:
-            data1 = get_stock_data(ticker1)
+            data1 = get_stock_data(ticker1, period1, interval1)
             percent_change1 = calculate_percente_change(data1)
 
             st.write(f"**{ticker1} Last Price:**", data1["Close"].iloc[-1])
@@ -32,9 +34,11 @@ def main():
     
     with col2:
         ticker2 = st.text_input("Enter the stock ticker:", value="IVVB11.SA")
+        period2 = st.text_input("Enter the period (e.g., '1d', '1mo', '1y', 'max'):", value="1d", key="period2")
+        interval2 = st.text_input("Enter the interval(e.g., '1m', '5m', '1h', '1d'):", value="1m", key="interval2")
 
         if ticker2:
-            data2 = get_stock_data(ticker2)
+            data2 = get_stock_data(ticker2, period2, interval2)
             percent_change2 = calculate_percente_change(data2)
 
             st.write(f"**{ticker2} Last Price:**", data2["Close"].iloc[-1])
