@@ -36,9 +36,11 @@ Stock Dashboard is developed in Python using functional programming principles a
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/stock-dashboard.git
+   git clone https://github.com/thpgoncalves/stock-dashboard.git
    cd stock-dashboard
 
+   streamlit run dashboard.py
+   
 ## Contact
 How to get in contact with me:
 
