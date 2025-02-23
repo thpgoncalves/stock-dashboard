@@ -36,9 +36,10 @@ def main():
             data1 = get_stock_data(ticker1, period1, interval1)
             if not data1.empty:
                 percent_change1 = calculate_percente_change(data1)
+                last_price1 = data1["Close"].iloc[-1]
 
-                st.write(f"**{ticker1} Last Price:**", data1["Close"].iloc[-1])
-                st.write(f"**{ticker1} Percent Change:**", percent_change1)
+                st.write(f"**{ticker1} Last Price:** $ {last_price1:.2f}", )
+                st.write(f"**{ticker1} Percent Change:** {percent_change1}")
 
                 chart1 = create_chart(data1)
                 st.plotly_chart(chart1, use_container_width=True)
@@ -60,8 +61,9 @@ def main():
             data2 = get_stock_data(ticker2, period2, interval2)
             if not data2.empty:   
                 percent_change2 = calculate_percente_change(data2)
+                last_price2 =  data2["Close"].iloc[-1]
 
-                st.write(f"**{ticker2} Last Price:**", data2["Close"].iloc[-1])
+                st.write(f"**{ticker2} Last Price:** $ {last_price2:.2f}",)
                 st.write(f"**{ticker2} Percent Change:**", percent_change2)
 
                 chart2 = create_chart(data2)
