@@ -22,7 +22,7 @@ def main():
     col1, col2 = st.columns(2) # creating columns to put the graphics side by side
 
     with col1:
-        st.markdown("#### 📌 Stock 1")
+        st.markdown(f"####  Stock 1")
         input_col1, input_col2, input_col3 = st.columns([2, 1, 1])
 
         with input_col1:
@@ -42,12 +42,12 @@ def main():
                 st.write(f"**{ticker1} Percent Change:** {percent_change1}")
 
                 chart1 = create_chart(data1)
-                st.plotly_chart(chart1, use_container_width=True)
+                st.plotly_chart(chart1, use_container_width=True, key="chart1")
             else:
                 st.write(f"⚠️ No data available for {ticker1}. Try a different period or interval.")
     
     with col2:
-        st.markdown("#### 📌 Stock 2")
+        st.markdown("####  Stock 2")
         input_col1, input_col2, input_col3 = st.columns([2, 1, 1])
 
         with input_col1:
@@ -63,13 +63,66 @@ def main():
                 percent_change2 = calculate_percente_change(data2)
                 last_price2 =  data2["Close"].iloc[-1]
 
-                st.write(f"**{ticker2} Last Price:** $ {last_price2:.2f}",)
+                st.write(f"**{ticker2} Last Price:** $ {last_price2:.2f}")
                 st.write(f"**{ticker2} Percent Change:**", percent_change2)
 
                 chart2 = create_chart(data2)
-                st.plotly_chart(chart2, use_container_width=True)
+                st.plotly_chart(chart2, use_container_width=True, key="chart2")
             else:
-                st.write(f"⚠️ No data available for {ticker1}. Try a different period or interval.")
+                st.write(f"⚠️ No data available for {ticker2}. Try a different period or interval.")
+    
+    # second line with 2 stocks chart
+    col3, col4 = st.columns(2) # creating columns to put the graphics side by side
+
+    with col3:
+        st.markdown("#### Stock 3")
+        input_col1, input_col2, input_col3 = st.columns([2, 1, 1])
+
+        with input_col1:
+            ticker3 = st.text_input("Enter the stock ticker:", value="RAIZ4.SA", key="ticker3")
+        with input_col2:
+            period3 = st.text_input("Enter the period: \n\n (e.g., '1d', '1mo', '1y', 'max')", value='1d', key="period3")
+        with input_col3:
+            interval3 = st.text_input("Enter the interval: \n\n (e.g., '1m', '5m', '1h', '1d')", value='1m', key="interval3")
+
+        if ticker3:
+            data3 = get_stock_data(ticker3, period3, interval3)
+            if not data3.empty:
+                percent_change3 = calculate_percente_change(data3)
+                last_price3 = data3["Close"].iloc[-1]
+
+                st.write(f"**{ticker3} Last Price:** $ {last_price3:.2f}")
+                st.write(f"**{ticker3} Percent Change:**", percent_change3)
+
+                chart3 = create_chart(data3)
+                st.plotly_chart(chart3, use_container_width=True, key="chart3")
+            else:
+                st.write(f"⚠️ No data available for {ticker3}. Try a different period or interval.") 
+
+    with col4:
+        st.markdown("#### Stock 3")
+        input_col1, input_col2, input_col3 = st.columns([2, 1, 1])
+
+        with input_col1:
+            ticker4 = st.text_input("Enter the stock ticker:", value="OPCT3.SA", key="ticker4")
+        with input_col2:
+            period4 = st.text_input("Enter the period: \n\n (e.g., '1d', '1mo', '1y', 'max')", value='1d', key="period4")
+        with input_col3:
+            interval4 = st.text_input("Enter the interval: \n\n (e.g., '1m', '5m', '1h', '1d')", value='1m', key="interval4")
+
+        if ticker4:
+            data4 = get_stock_data(ticker4, period4, interval4)
+            if not data4.empty:
+                percent_change4 = calculate_percente_change(data4)
+                last_price4 = data4["Close"].iloc[-1]
+
+                st.write(f"**{ticker4} Last Price:** $ {last_price4:.2f}")
+                st.write(f"**{ticker4} Percent Change:**", percent_change4)
+
+                chart4 = create_chart(data4)
+                st.plotly_chart(chart4, use_container_width=True, key="chart4")
+            else:
+                st.write(f"⚠️ No data available for {ticker4}. Try a different period or interval.") 
 
 if __name__ == "__main__":
     main()
