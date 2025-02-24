@@ -38,8 +38,7 @@ def main():
                 percent_change1 = calculate_percente_change(data1)
                 last_price1 = data1["Close"].iloc[-1]
 
-                st.write(f"**{ticker1} Last Price:** $ {last_price1:.2f}", )
-                st.write(f"**{ticker1} Percent Change:** {percent_change1}")
+                st.metric(label=f"📈 {ticker1} Last price", value=f"$ {last_price1:.2f}", delta=f"{percent_change1}%")
 
                 chart1 = create_chart(data1, f"{ticker1} Stock Price Over Time")
                 st.plotly_chart(chart1, use_container_width=True, key="chart1")
@@ -62,9 +61,8 @@ def main():
             if not data2.empty:   
                 percent_change2 = calculate_percente_change(data2)
                 last_price2 =  data2["Close"].iloc[-1]
-
-                st.write(f"**{ticker2} Last Price:** $ {last_price2:.2f}")
-                st.write(f"**{ticker2} Percent Change:**", percent_change2)
+                
+                st.metric(label=f"📈 {ticker1} Last price", value=f"$ {last_price2:.2f}", delta=f"{percent_change2}%")                
 
                 chart2 = create_chart(data2, f"{ticker2} Stock Price Over Time")
                 st.plotly_chart(chart2, use_container_width=True, key="chart2")
@@ -91,8 +89,7 @@ def main():
                 percent_change3 = calculate_percente_change(data3)
                 last_price3 = data3["Close"].iloc[-1]
 
-                st.write(f"**{ticker3} Last Price:** $ {last_price3:.2f}")
-                st.write(f"**{ticker3} Percent Change:**", percent_change3)
+                st.metric(label=f"📈 {ticker1} Last price", value=f"$ {last_price3:.2f}", delta=f"{percent_change3}%")
 
                 chart3 = create_chart(data3, f"{ticker3} Stock Price Over Time")
                 st.plotly_chart(chart3, use_container_width=True, key="chart3")
@@ -116,8 +113,7 @@ def main():
                 percent_change4 = calculate_percente_change(data4)
                 last_price4 = data4["Close"].iloc[-1]
 
-                st.write(f"**{ticker4} Last Price:** $ {last_price4:.2f}")
-                st.write(f"**{ticker4} Percent Change:**", percent_change4)
+                st.metric(label=f"📈 {ticker1} Last price", value=f"$ {last_price4:.2f}", delta=f"{percent_change4}%")
 
                 chart4 = create_chart(data4, f"{ticker4} Stock Price Over Time")
                 st.plotly_chart(chart4, use_container_width=True, key="chart4")
