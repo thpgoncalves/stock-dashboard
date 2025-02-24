@@ -7,11 +7,11 @@ from data_processing import *
 
 st.set_page_config(layout="wide")
 
-def create_chart(data: pd.DataFrame):
+def create_chart(data: pd.DataFrame, title: str):
     """
     Creates an interactive line chart for the closing prices.
     """
-    fig = px.line(data, x=data.index, y="Close", title="Stock Price Over Time")
+    fig = px.line(data, x=data.index, y="Close", title=title)
     return fig
 
 def main():
@@ -41,7 +41,7 @@ def main():
                 st.write(f"**{ticker1} Last Price:** $ {last_price1:.2f}", )
                 st.write(f"**{ticker1} Percent Change:** {percent_change1}")
 
-                chart1 = create_chart(data1)
+                chart1 = create_chart(data1, f"{ticker1} Stock Price Over Time")
                 st.plotly_chart(chart1, use_container_width=True, key="chart1")
             else:
                 st.write(f"⚠️ No data available for {ticker1}. Try a different period or interval.")
@@ -66,7 +66,7 @@ def main():
                 st.write(f"**{ticker2} Last Price:** $ {last_price2:.2f}")
                 st.write(f"**{ticker2} Percent Change:**", percent_change2)
 
-                chart2 = create_chart(data2)
+                chart2 = create_chart(data2, f"{ticker2} Stock Price Over Time")
                 st.plotly_chart(chart2, use_container_width=True, key="chart2")
             else:
                 st.write(f"⚠️ No data available for {ticker2}. Try a different period or interval.")
@@ -94,7 +94,7 @@ def main():
                 st.write(f"**{ticker3} Last Price:** $ {last_price3:.2f}")
                 st.write(f"**{ticker3} Percent Change:**", percent_change3)
 
-                chart3 = create_chart(data3)
+                chart3 = create_chart(data3, f"{ticker3} Stock Price Over Time")
                 st.plotly_chart(chart3, use_container_width=True, key="chart3")
             else:
                 st.write(f"⚠️ No data available for {ticker3}. Try a different period or interval.") 
@@ -119,7 +119,7 @@ def main():
                 st.write(f"**{ticker4} Last Price:** $ {last_price4:.2f}")
                 st.write(f"**{ticker4} Percent Change:**", percent_change4)
 
-                chart4 = create_chart(data4)
+                chart4 = create_chart(data4, f"{ticker4} Stock Price Over Time")
                 st.plotly_chart(chart4, use_container_width=True, key="chart4")
             else:
                 st.write(f"⚠️ No data available for {ticker4}. Try a different period or interval.") 
