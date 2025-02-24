@@ -15,9 +15,9 @@ def create_chart(data: pd.DataFrame, title: str):
     return fig
 
 def main():
-    st.markdown("<h1 style='text-align: center;'>📊 Stock Dashboard</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;'>📈 Stock Dashboard</h1>", unsafe_allow_html=True)
 
-    st.markdown("<h1 style='text-align: center;'>  Select Stock and Parameters</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;'>  Select Stocks and Parameters</h1>", unsafe_allow_html=True)
 
     col1, col2 = st.columns(2) # creating columns to put the graphics side by side
 
