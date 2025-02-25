@@ -1,11 +1,23 @@
 import streamlit as st
 import plotly.express as px
 import pandas as pd
+from streamlit_autorefresh import st_autorefresh
 
 from data_acquisition import *
 from data_processing import *
 
 st.set_page_config(layout="wide")
+
+# update the grafics every 1 min
+st_autorefresh(interval= 60 * 1000, key="data_refresh")
+
+# refresh tester
+# if "refresh_count" not in st.session_state:
+#     st.session_state.refresh_count = 0
+
+# st.session_state.refresh_count += 1
+
+# st.write(f" **Page refreshed automatically:** '{st.session_state.refresh_count}' times")
 
 def create_chart(data: pd.DataFrame, title: str):
     """
