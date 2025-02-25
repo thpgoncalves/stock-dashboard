@@ -8,8 +8,8 @@ from data_processing import *
 
 st.set_page_config(layout="wide")
 
-# update the grafics every 1 min
-st_autorefresh(interval= 60 * 1000, key="data_refresh")
+# update the grafics every 30 sec
+st_autorefresh(interval= 30 * 1000, key="data_refresh")
 
 # refresh tester
 # if "refresh_count" not in st.session_state:
@@ -42,7 +42,7 @@ def main():
         with input_col2:
             period1 = st.text_input("Enter the period: \n\n(e.g., '1d', '1mo', '1y', 'max')", value="1d", key="period1")
         with input_col3:
-            interval1 = st.text_input("Enter the interval: \n\n(e.g., '1m', '5m', '1h', '1d')", value="5m", key="interval1")
+            interval1 = st.text_input("Enter the interval: \n\n(e.g., '1m', '5m', '1h', '1d')", value="1m", key="interval1")
 
         if ticker1:
             data1 = get_stock_data(ticker1, period1, interval1)
@@ -66,7 +66,7 @@ def main():
         with input_col2:
             period2 = st.text_input("Enter the period: \n\n(e.g., '1d', '1mo', '1y', 'max')", value="1d", key="period2")
         with input_col3:
-            interval2 = st.text_input("Enter the interval: \n\n(e.g., '1m', '5m', '1h', '1d')", value="5m", key="interval2")
+            interval2 = st.text_input("Enter the interval: \n\n(e.g., '1m', '5m', '1h', '1d')", value="1m", key="interval2")
 
         if ticker2:
             data2 = get_stock_data(ticker2, period2, interval2)
@@ -93,7 +93,7 @@ def main():
         with input_col2:
             period3 = st.text_input("Enter the period: \n\n (e.g., '1d', '1mo', '1y', 'max')", value='1d', key="period3")
         with input_col3:
-            interval3 = st.text_input("Enter the interval: \n\n (e.g., '1m', '5m', '1h', '1d')", value='5m', key="interval3")
+            interval3 = st.text_input("Enter the interval: \n\n (e.g., '1m', '5m', '1h', '1d')", value='1m', key="interval3")
 
         if ticker3:
             data3 = get_stock_data(ticker3, period3, interval3)
@@ -117,7 +117,7 @@ def main():
         with input_col2:
             period4 = st.text_input("Enter the period: \n\n (e.g., '1d', '1mo', '1y', 'max')", value='1d', key="period4")
         with input_col3:
-            interval4 = st.text_input("Enter the interval: \n\n (e.g., '1m', '5m', '1h', '1d')", value='5m', key="interval4")
+            interval4 = st.text_input("Enter the interval: \n\n (e.g., '1m', '5m', '1h', '1d')", value='1m', key="interval4")
 
         if ticker4:
             data4 = get_stock_data(ticker4, period4, interval4)
