@@ -19,6 +19,14 @@ st_autorefresh(interval= 30 * 1000, key="data_refresh")
 
 # st.write(f" **Page refreshed automatically:** '{st.session_state.refresh_count}' times")
 
+# Mapping periods for the buttons
+PERIOD_OPTIONS = {
+    "YTD": ("ytd", "1d"),
+    "Month": ("1mo", "1d"),
+    "Week": ("1wk", "1h"),
+    "Day": ("1d", "1h"),
+}
+
 def create_chart(data: pd.DataFrame, title: str):
     """
     Creates an interactive line chart for the closing prices.
@@ -27,110 +35,65 @@ def create_chart(data: pd.DataFrame, title: str):
     return fig
 
 def main():
-    st.markdown("<h1 style='text-align: center;'>📈 Stock Dashboard</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;'>📈 Stock Dashboard </h1>", unsafe_allow_html=True)
+    st.markdown("### Select Stocks Tickers and Parameters")
 
-    st.markdown("<h1 style='text-align: center;'>  Select Stocks and Parameters</h1>", unsafe_allow_html=True)
+    col1, col2 = st.columns(2)
 
-    col1, col2 = st.columns(2) # creating columns to put the graphics side by side
+    for col, stock_number in zip([col1, col2], range(1,3)): # loop for stock 1, 2
+        with col:
+            st.markdown("### Stock {stock_number}")
+            ticker = st.text_input("Enter the stock ticker:", value="BERK34.SA" if stock_number == 1 else "IVVB11.SA", key=f"ticker{stock_number}")
 
-    with col1:
-        st.markdown(f"####  Stock 1")
-        input_col1, input_col2, input_col3 = st.columns([2, 1, 1])
+            # period selector
+            selected_period = st.radio(
+                f"Select period for Stock {stock_number}",
+                options=list(PERIOD_OPTIONS),
+                index=list(PERIOD_OPTIONS.keys()).index("Day"),
+                key=f"period_selection_{stock_number}",
+                horizontal=True
+            ) 
 
-        with input_col1:
-            ticker1 = st.text_input("Enter the stock ticker:", value="BERK34.SA", key="ticker1")
-        with input_col2:
-            period1 = st.text_input("Enter the period: \n\n(e.g., '1d', '1mo', '1y', 'max')", value="1d", key="period1")
-        with input_col3:
-            interval1 = st.text_input("Enter the interval: \n\n(e.g., '1m', '5m', '1h', '1d')", value="1m", key="interval1")
+            period, interval = PERIOD_OPTIONS[selected_period]
 
-        if ticker1:
-            data1 = get_stock_data(ticker1, period1, interval1)
-            if not data1.empty:
-                percent_change1 = calculate_percente_change(data1)
-                last_price1 = data1["Close"].iloc[-1]
+            if ticker:
+                data = get_stock_data(ticker, period, interval)
+                if not data.empty:
+                    percent_change = calculate_percente_change(data)
+                    last_price = data["Close"].iloc[-1]
 
-                st.metric(label=f"{ticker1} Last price", value=f"R$ {last_price1:.2f}", delta=f"{percent_change1}%")
+                    st.metric(label=f"📈 {ticker} Last Price", value=f"R$ {last_price:.2f}", delta=f"{percent_change}%")
 
-                chart1 = create_chart(data1, f"{ticker1} Stock Price Over Time")
-                st.plotly_chart(chart1, use_container_width=True, key="chart1")
-            else:
-                st.write(f"⚠️ No data available for {ticker1}. Try a different period or interval.")
-    
-    with col2:
-        st.markdown("####  Stock 2")
-        input_col1, input_col2, input_col3 = st.columns([2, 1, 1])
+                    chart = create_chart(data, f"{ticker} Stock Price Over Time")
+                    st.plotly_chart(chart, use_container_width=True, key=f"chart{stock_number}")
 
-        with input_col1:
-            ticker2 = st.text_input("Enter the stock ticker:", value="IVVB11.SA", key="ticker2")
-        with input_col2:
-            period2 = st.text_input("Enter the period: \n\n(e.g., '1d', '1mo', '1y', 'max')", value="1d", key="period2")
-        with input_col3:
-            interval2 = st.text_input("Enter the interval: \n\n(e.g., '1m', '5m', '1h', '1d')", value="1m", key="interval2")
+    col3, col4 = st.columns(2)
 
-        if ticker2:
-            data2 = get_stock_data(ticker2, period2, interval2)
-            if not data2.empty:   
-                percent_change2 = calculate_percente_change(data2)
-                last_price2 =  data2["Close"].iloc[-1]
-                
-                st.metric(label=f"{ticker2} Last price", value=f"R$ {last_price2:.2f}", delta=f"{percent_change2}%")                
+    for col, stock_number in zip([col3, col4], range(3,5)): # loop for stocks 3, 4
+        with col:
+            st.markdown(f"### Stock {stock_number}")
+            ticker = st.text_input("Enter the stock ticker:", value="RAIZ4.SA" if stock_number == 3 else "OPCT3.SA", key=f"ticker{stock_number}")
 
-                chart2 = create_chart(data2, f"{ticker2} Stock Price Over Time")
-                st.plotly_chart(chart2, use_container_width=True, key="chart2")
-            else:
-                st.write(f"⚠️ No data available for {ticker2}. Try a different period or interval.")
-    
-    # second line with 2 stocks chart
-    col3, col4 = st.columns(2) # creating columns to put the graphics side by side
+            # period selector
+            selected_period = st.radio(
+                f"Select period for Stock {stock_number}",
+                options=list(PERIOD_OPTIONS),
+                index=list(PERIOD_OPTIONS.keys()).index("Day"),
+                key=f"period_selection_{stock_number}",
+                horizontal=True
+            ) 
 
-    with col3:
-        st.markdown("#### Stock 3")
-        input_col1, input_col2, input_col3 = st.columns([2, 1, 1])
+            period, interval = PERIOD_OPTIONS[selected_period]
 
-        with input_col1:
-            ticker3 = st.text_input("Enter the stock ticker:", value="RAIZ4.SA", key="ticker3")
-        with input_col2:
-            period3 = st.text_input("Enter the period: \n\n (e.g., '1d', '1mo', '1y', 'max')", value='1d', key="period3")
-        with input_col3:
-            interval3 = st.text_input("Enter the interval: \n\n (e.g., '1m', '5m', '1h', '1d')", value='1m', key="interval3")
+            if ticker:
+                data = get_stock_data(ticker, period, interval)
+                if not data.empty:
+                    percent_change = calculate_percente_change(data)
+                    last_price = data["Close"].iloc[-1]
 
-        if ticker3:
-            data3 = get_stock_data(ticker3, period3, interval3)
-            if not data3.empty:
-                percent_change3 = calculate_percente_change(data3)
-                last_price3 = data3["Close"].iloc[-1]
+                    st.metric(label=f"{ticker} Last Price", value=f"R$ {last_price:.2f}", delta=f"{percent_change}%")
 
-                st.metric(label=f"{ticker3} Last price", value=f"R$ {last_price3:.2f}", delta=f"{percent_change3}%")
-
-                chart3 = create_chart(data3, f"{ticker3} Stock Price Over Time")
-                st.plotly_chart(chart3, use_container_width=True, key="chart3")
-            else:
-                st.write(f"⚠️ No data available for {ticker3}. Try a different period or interval.") 
-
-    with col4:
-        st.markdown("#### Stock 3")
-        input_col1, input_col2, input_col3 = st.columns([2, 1, 1])
-
-        with input_col1:
-            ticker4 = st.text_input("Enter the stock ticker:", value="OPCT3.SA", key="ticker4")
-        with input_col2:
-            period4 = st.text_input("Enter the period: \n\n (e.g., '1d', '1mo', '1y', 'max')", value='1d', key="period4")
-        with input_col3:
-            interval4 = st.text_input("Enter the interval: \n\n (e.g., '1m', '5m', '1h', '1d')", value='1m', key="interval4")
-
-        if ticker4:
-            data4 = get_stock_data(ticker4, period4, interval4)
-            if not data4.empty:
-                percent_change4 = calculate_percente_change(data4)
-                last_price4 = data4["Close"].iloc[-1]
-
-                st.metric(label=f"{ticker4} Last price", value=f"R$ {last_price4:.2f}", delta=f"{percent_change4}%")
-
-                chart4 = create_chart(data4, f"{ticker4} Stock Price Over Time")
-                st.plotly_chart(chart4, use_container_width=True, key="chart4")
-            else:
-                st.write(f"⚠️ No data available for {ticker4}. Try a different period or interval.") 
-
+                    chart = create_chart(data, f"{ticker} Stock Price Over Time")
+                    st.plotly_chart(chart, use_container_width=True, key=f"chart{stock_number}")
 if __name__ == "__main__":
     main()
