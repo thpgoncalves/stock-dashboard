@@ -35,6 +35,17 @@ def create_chart(data: pd.DataFrame, title: str):
     return fig
 
 def main():
+    st.markdown(
+    """
+    <style>
+        .block-container {
+            padding-top: 0rem;  /* Reduz o espaçamento superior */
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+    )
+
     st.markdown("<h1 style='text-align: center;'>Select Stocks Tickers and Parameters</h1>", unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
