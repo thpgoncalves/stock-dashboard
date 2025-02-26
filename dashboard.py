@@ -35,14 +35,13 @@ def create_chart(data: pd.DataFrame, title: str):
     return fig
 
 def main():
-    st.markdown("<h1 style='text-align: center;'>📈 Stock Dashboard </h1>", unsafe_allow_html=True)
-    st.markdown("### Select Stocks Tickers and Parameters")
+    st.markdown("<h1 style='text-align: center;'>Select Stocks Tickers and Parameters</h1>", unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
 
     for col, stock_number in zip([col1, col2], range(1,3)): # loop for stock 1, 2
         with col:
-            st.markdown("### Stock {stock_number}")
+            st.markdown(f"### Stock {stock_number}")
             ticker = st.text_input("Enter the stock ticker:", value="BERK34.SA" if stock_number == 1 else "IVVB11.SA", key=f"ticker{stock_number}")
 
             # period selector
