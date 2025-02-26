@@ -105,5 +105,9 @@ def main():
 
                     chart = create_chart(data, f"{ticker} Stock Price Over Time")
                     st.plotly_chart(chart, use_container_width=True, key=f"chart{stock_number}")
+    
+    # If you want to add another line with 2 charts, create the collumns 
+    # and repeat the loop changing the range and collumns variable name
+
 if __name__ == "__main__":
     main()
