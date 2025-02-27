@@ -23,6 +23,7 @@ st_autorefresh(interval= 30 * 1000, key="data_refresh")
 
 # Mapping periods for the buttons
 PERIOD_OPTIONS = {
+    "Max": ("max", "1d"),
     "YTD": ("ytd", "1d"),
     "Month": ("1mo", "1d"),
     "Week": ("1wk", "1h"),
@@ -171,7 +172,7 @@ def main():
         selected_comparison_period = st.radio(
             "Select comparison period:",
             options=list(PERIOD_OPTIONS),
-            index = list(PERIOD_OPTIONS.keys()).index("Day"),
+            index = list(PERIOD_OPTIONS.keys()).index("Max"),
             horizontal=True
         )
 
