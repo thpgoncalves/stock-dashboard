@@ -31,6 +31,7 @@ def get_comparison_data(tickers: str | list[str], period="1mo", interval="1d"):
 def plot_comparison_chart(df):
     """
     Generate comparison line chart for multiple stocks.
+    Adds highlighted labels with the last available value for each stock.
     """
     if df.empty:
         return None
@@ -45,14 +46,16 @@ def plot_comparison_chart(df):
         last_date = df.index[-1] # last date available
         last_value = df[stock].iloc[-1] # last percent change available
 
-        fig.add_trace(
-            go.Scatter(
-                x=[last_date],
-                y=[last_value],
-                text=[f"{last_value:.2f}%"],
-                mode="text",
-                textposition="middle right",
-                showlegend=False
-            )
+        fig.add_annotation(
+            x=last_date,
+            y=last_value,
+            text=f"<b>{last_value:.2f}%</b>",  # bold on label
+            showarrow=False,
+            font=dict(size=12, color="black"),  # Size up the font
+            bgcolor="white",  # white background
+            bordercolor="black",  # black border on label
+            xshift=25,  # trying to avoid overlap
+            yshift=3,
         )
+
     return fig
