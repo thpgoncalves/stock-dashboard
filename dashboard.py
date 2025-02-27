@@ -161,7 +161,7 @@ def main():
                 st.warning("No stocks found. Try another search.")
         
         # allow manual tickers input
-        manual_tickers = st.text_area("Enter tickers separated by commas:", "BERK34.SA, IVVB11.SA, RAIZ4.SA, OPCT3.SA")
+        manual_tickers = st.text_area("Enter tickers separated by commas:", "IVVB11.SA, BOVA11.SA")
         manual_ticker_list = [ticker.strip() for ticker in manual_tickers.split(',') if ticker.split()]
 
         if selected_comparison_stock and selected_comparison_stock not in manual_ticker_list:
