@@ -3,7 +3,8 @@ import plotly.express as px
 import pandas as pd
 from streamlit_autorefresh import st_autorefresh
 
-from data_acquisition import *
+from data_acquisition.get_stock_data import get_stock_data
+from data_acquisition.data_search import search_stock
 from data_processing import *
 
 st.set_page_config(layout="wide")
@@ -53,8 +54,27 @@ def main():
     for col, stock_number in zip([col1, col2], range(1,3)): # loop for stock 1, 2
         with col:
             st.markdown(f"### Stock {stock_number}")
-            ticker = st.text_input("Enter the stock ticker:", value="BERK34.SA" if stock_number == 1 else "IVVB11.SA", key=f"ticker{stock_number}")
+            
+            # default tickers
+            default_tickers = ["BERK34.SA", "IVVB11.SA"]
+            default_ticker = default_tickers[stock_number - 1]
 
+            # search by name
+            company_name = st.text_input(f"Search Stock {stock_number} by Name:", key=f"company_search_{stock_number}", placeholder="Enter company name...")
+            selected_stock = None
+            if company_name:
+                stock_options = search_stock(company_name)
+                if stock_options:
+                    selected_stock = st.selectbox(f"Select Stock {stock_number}:", stock_options, key=f"ticker_selected_{stock_number}") 
+                else:
+                    st.warning("No stocks found. Try another search")
+            
+            # ticker option if user already knows what he wants
+            ticker = st.text_input(
+                f"Or enter a ticker manually for Stock {stock_number}",
+                value=selected_stock if selected_stock else default_ticker,
+                key=f"ticker{stock_number}"
+            )
             # period selector
             selected_period = st.radio(
                 f"Select period for Stock {stock_number}",
@@ -82,8 +102,28 @@ def main():
     for col, stock_number in zip([col3, col4], range(3,5)): # loop for stocks 3, 4
         with col:
             st.markdown(f"### Stock {stock_number}")
-            ticker = st.text_input("Enter the stock ticker:", value="RAIZ4.SA" if stock_number == 3 else "OPCT3.SA", key=f"ticker{stock_number}")
+            
+            # default tickers
+            default_tickers = ["RAIZ4.SA", "OPCT3.SA"]
+            default_ticker = default_tickers[stock_number - 3]
 
+            # search by name
+            company_name = st.text_input(f"Search Stock {stock_number} by Name:", key=f"company_search_{stock_number}", placeholder="Enter company name...")
+            selected_stock = None
+            if company_name:
+                stock_options = search_stock(company_name)
+                if stock_options:
+                    selected_stock = st.selectbox(f"Select Stock {stock_number}:", stock_options, key=f"ticker_selected_{stock_number}") 
+                else:
+                    st.warning("No stocks found. Try another search")
+            
+            # ticker option if user already knows what he wants
+            ticker = st.text_input(
+                f"Or enter ticker manually for Stock {stock_number}:", 
+                value=selected_stock if selected_stock else default_ticker,
+                key=f"ticker{stock_number}"
+                )
+            
             # period selector
             selected_period = st.radio(
                 f"Select period for Stock {stock_number}",
