@@ -1,6 +1,6 @@
 # Stock Dashboard 📈
 
-Welcome to **Stock Dashboard**! This project aims to offer near real-time visualization of stock data for tickers of your choice. The application displays the current price, percentage change, and interactive charts to help you understand price trends. You can use this application locally and edit it to reflect the assets you want to monitor or evaluate new assets. Have your personal stock dashboard available wherever you are just clone the repository and run streamlit.
+Welcome to **Stock Dashboard**! This project aims to offer near real-time visualization of stock data for tickers of your choice. The application displays the current price, percentage change, and interactive charts to help you understand price trends. You can use this application locally and edit it to reflect the assets you want to monitor or evaluate new assets. Have your personal stock dashboard available wherever you are just clone the repository and run streamlit. 
 
 --- 
 
