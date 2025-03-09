@@ -8,7 +8,7 @@ Welcome to **Stock Dashboard**! This project aims to offer near real-time visual
 ### Dashboard Tab View 
 ![Stock Dashboard Screenshot](./src/stock_dashboard.png)
 
-### Comparison Tab View
+### Comparison Tab View 
 ![Stock Comparison Screenshot](./src/stock_comparison.png)
 
 ---
