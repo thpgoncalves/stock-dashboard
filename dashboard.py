@@ -10,8 +10,8 @@ from data_processing.charts import *
 
 st.set_page_config(layout="wide")
 
-# update the grafics every 30 sec
-st_autorefresh(interval= 30 * 1000, key="data_refresh")
+# update the grafics every 60s
+st_autorefresh(interval= 60 * 1000, key="data_refresh")
 
 # refresh tester
 # if "refresh_count" not in st.session_state:
@@ -162,7 +162,7 @@ def main():
                 st.warning("No stocks found. Try another search.")
         
         # allow manual tickers input
-        manual_tickers = st.text_area("Enter tickers separated by commas:", "BERK34.SA, IVVB11.SA, BOVA11.SA, PETR4.SA")
+        manual_tickers = st.text_area("Enter tickers separated by commas:", "BERK34.SA, IVVB11.SA, RAIZ4.SA, OPCT3.SA") # Change default stocks
         manual_ticker_list = [ticker.strip() for ticker in manual_tickers.split(',') if ticker.split()]
 
         if selected_comparison_stock and selected_comparison_stock not in manual_ticker_list:
@@ -172,7 +172,7 @@ def main():
         selected_comparison_period = st.radio(
             "Select comparison period:",
             options=list(PERIOD_OPTIONS),
-            index = list(PERIOD_OPTIONS.keys()).index("Max"),
+            index = list(PERIOD_OPTIONS.keys()).index("Day"), # default selection
             horizontal=True
         )
 
@@ -189,5 +189,5 @@ def main():
                 st.write("No data available for the selected stocks.")
         
 
-if __name__ == "__main__":
+if __name__ == "__main__":  
     main()
