@@ -195,9 +195,11 @@ def main():
         comparison_period, comparison_interval = PERIOD_OPTIONS[selected_comparison_period]
         
         if selected_comparison_period == "Custom":
-            comparison_period = st.text_input("Enter custom period:", placeholder="1d, 1wk, 1mo, 1y, ytd...", key="custom_comparison_period")
-            comparison_interval = st.text_input("Enter custom interval:", placeholder="1m, 1h, 1d, 1wk, 1mo...", key="custom_comparison_interval")
+            comparison_period_input = st.text_input("Enter custom period:", placeholder="1d, 1wk, 1mo, 1y, ytd...", key="custom_comparison_period")
+            comparison_interval_input = st.text_input("Enter custom interval:", placeholder="1m, 1h, 1d, 1wk, 1mo...", key="custom_comparison_interval")
 
+            comparison_period = comparison_period_input if comparison_period_input else "1y"
+            comparison_interval = comparison_interval_input if comparison_interval_input else "1d"
 
         st.write(f"**Selected Stocks for Comparison:** {', '.join(manual_ticker_list)}")
 
