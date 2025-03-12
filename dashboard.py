@@ -28,6 +28,7 @@ PERIOD_OPTIONS = {
     "Month": ("1mo", "1d"),
     "Week": ("1wk", "1h"),
     "Day": ("1d", "1m"),
+    "Custom": ("1y", "1d")
 }
 
 def main():
@@ -83,6 +84,10 @@ def main():
                 ) 
 
                 period, interval = PERIOD_OPTIONS[selected_period]
+                
+                if selected_period == "Custom":
+                    period = st.text_input("Enter custom period:", placeholder="1d, 1wk, 1mo, 1y, ytd...", key=f"stock_period_{stock_number}")
+                    interval = st.text_input("Enter custom interval:", placeholder="1m, 1h, 1d, 1wk, 1mo...", key=f"stock_interval_{stock_number}")   
 
                 if ticker:
                     data = get_stock_data(ticker, period, interval)
@@ -129,10 +134,14 @@ def main():
                     index=list(PERIOD_OPTIONS.keys()).index("Day"),
                     key=f"period_selection_{stock_number}",
                     horizontal=True
-                ) 
+                )
 
                 period, interval = PERIOD_OPTIONS[selected_period]
-
+                
+                if selected_period == "Custom":
+                    period = st.text_input("Enter custom period:", placeholder="1d, 1wk, 1mo, 1y, ytd...", key=f"stock_period_{stock_number}")
+                    interval = st.text_input("Enter custom interval:", placeholder="1m, 1h, 1d, 1wk, 1mo...", key=f"stock_interval_{stock_number}")   
+                    
                 if ticker:
                     data = get_stock_data(ticker, period, interval)
                     if not data.empty:
@@ -177,6 +186,11 @@ def main():
         )
 
         comparison_period, comparison_interval = PERIOD_OPTIONS[selected_comparison_period]
+        
+        if selected_comparison_period == "Custom":
+            comparison_period = st.text_input("Enter custom period:", placeholder="1d, 1wk, 1mo, 1y, ytd...", key="custom_comparison_period")
+            comparison_interval = st.text_input("Enter custom interval:", placeholder="1m, 1h, 1d, 1wk, 1mo...", key="custom_comparison_interval")
+
 
         st.write(f"**Selected Stocks for Comparison:** {', '.join(manual_ticker_list)}")
 
