@@ -86,8 +86,11 @@ def main():
                 period, interval = PERIOD_OPTIONS[selected_period]
                 
                 if selected_period == "Custom":
-                    period = st.text_input("Enter custom period:", placeholder="1d, 1wk, 1mo, 1y, ytd...", key=f"stock_period_{stock_number}")
-                    interval = st.text_input("Enter custom interval:", placeholder="1m, 1h, 1d, 1wk, 1mo...", key=f"stock_interval_{stock_number}")   
+                    period_input = st.text_input("Enter custom period:", placeholder="1d, 1wk, 1mo, 1y, ytd...", key=f"stock_period_{stock_number}")
+                    interval_input = st.text_input("Enter custom interval:", placeholder="1m, 1h, 1d, 1wk, 1mo...", key=f"stock_interval_{stock_number}")   
+
+                    period = period_input if period_input else "1y"
+                    interval = interval_input if interval_input else "1d"
 
                 if ticker:
                     data = get_stock_data(ticker, period, interval)
@@ -139,9 +142,12 @@ def main():
                 period, interval = PERIOD_OPTIONS[selected_period]
                 
                 if selected_period == "Custom":
-                    period = st.text_input("Enter custom period:", placeholder="1d, 1wk, 1mo, 1y, ytd...", key=f"stock_period_{stock_number}")
-                    interval = st.text_input("Enter custom interval:", placeholder="1m, 1h, 1d, 1wk, 1mo...", key=f"stock_interval_{stock_number}")   
+                    period_input = st.text_input("Enter custom period:", placeholder="1d, 1wk, 1mo, 1y, ytd...", key=f"stock_period_{stock_number}")
+                    interval_input = st.text_input("Enter custom interval:", placeholder="1m, 1h, 1d, 1wk, 1mo...", key=f"stock_interval_{stock_number}")   
                     
+                    period = period_input if period_input else "1y"
+                    interval = interval_input if interval_input else "1d"
+
                 if ticker:
                     data = get_stock_data(ticker, period, interval)
                     if not data.empty:
@@ -155,6 +161,7 @@ def main():
         
         # If you want to add another line with 2 charts, create the collumns 
         # and repeat the loop changing the range and collumns variable name
+    
     # Comparison tab
     with tab2:
         st.markdown("### Compare multiple Stocks")
