@@ -3,7 +3,7 @@ import plotly.express as px
 import pandas as pd
 from streamlit_autorefresh import st_autorefresh
 
-from data_acquisition.get_stock_data import get_stock_data
+from data_acquisition.get_stock_data import *
 from data_acquisition.data_search import search_stock
 from data_processing.process_stock_data import calculate_percente_change
 from data_processing.charts import *
