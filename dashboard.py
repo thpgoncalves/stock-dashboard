@@ -45,7 +45,7 @@ def main():
     
     tab1, tab2 = st.tabs(["📈 Dashboard", "📊 Stock Comparison"])
 
-    with tab1:
+    with tab1: # "Solo" stock view tab
         st.markdown("<h1 style='text-align: center;'>Select Stocks Tickers and Parameters</h1>", unsafe_allow_html=True)
 
         col1, col2 = st.columns(2)
@@ -161,9 +161,8 @@ def main():
         
         # If you want to add another line with 2 charts, create the collumns 
         # and repeat the loop changing the range and collumns variable name
-    
-    # Comparison tab
-    with tab2:
+     
+    with tab2: # Comparison tab
         st.markdown("### Compare multiple Stocks")
 
         # search company by the name
