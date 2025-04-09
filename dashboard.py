@@ -1,3 +1,5 @@
+import io
+import contextlib
 import streamlit as st
 import plotly.express as px
 import pandas as pd
@@ -202,14 +204,27 @@ def main():
 
         st.write(f"**Selected Stocks for Comparison:** {', '.join(manual_ticker_list)}")
 
-        if manual_ticker_list:
-            df_comparison = get_comparison_data(manual_ticker_list, comparison_period, comparison_interval)
-            if not df_comparison.empty:
-                fig_comparison = plot_comparison_chart(df_comparison)
-                st.plotly_chart(fig_comparison, use_container_width=True)
-            else:
-                st.write("No data available for the selected stocks.")
-        
+        try:
+            if manual_ticker_list:
+                stderr_buffer = io.StringIO()
+                with contextlib.redirect_stderr(stderr_buffer):
+                    df_comparison = get_comparison_data(manual_ticker_list, comparison_period, comparison_interval)
+                
+                stderr_output = stderr_buffer.getvalue()
 
+                if df_comparison.empty:
+                    if stderr_output:
+                        st.error("No data has returned. Possible Yahoo Finance error:")
+                        st.code(stderr_output, language="bash")
+                    else:
+                        st.error("No data returned for selected tickers.")
+                else:
+                    fig_comparison = plot_comparison_chart(df_comparison)
+                    st.plotly_chart(fig_comparison, use_container_width=True)
+
+        except Exception as e:
+            st.error("Error while fetching or processing stock data.")
+            st.code(str(e), language="bash")
+            
 if __name__ == "__main__":  
     main()
