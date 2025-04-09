@@ -13,23 +13,19 @@ def get_comparison_data(tickers: str | list[str], period="1mo", interval="1d"):
     Fetch historical data for multiple tickers and normalize to a common start date.
     """
     df = pd.DataFrame()
-    errors = []
 
     for ticker in tickers:
         try:
             stock = yf.Ticker(ticker)
             stock_data = stock.history(period=period, interval=interval)['Close']
 
-            if stock_data.empty:
-                errors.append(f"{ticker}: No data found (period={period}, interval={interval})")
-            else:
+            if not stock_data.empty:
                 df[ticker] = stock_data
-
         except Exception as e:
-            errors.append(f"{ticker}: Errir fetching data -> {str(e)}")
+            print(f"Failed to fetch data for {ticker}: {e}")
 
     if df.empty:
-        return pd.DataFrame(), errors
+        return df
     
     # normalizing to a common start date
     df = df.dropna(how="any")
@@ -37,10 +33,10 @@ def get_comparison_data(tickers: str | list[str], period="1mo", interval="1d"):
     df = df[valid_stocks]
 
     if df.empty:
-        errors.append("All tickers dropped due to missing data on common start date.")
-        return pd.DataFrame(), errors
+        print("No valid stocks found after filtering. Returning empty DataFrame.")
+        return pd.DataFrame()
     
     # calculating percent change
     df = ((df / df.iloc[0]) - 1) * 100
     
-    return df, errors
+    return df
