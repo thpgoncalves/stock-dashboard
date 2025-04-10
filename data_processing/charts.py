@@ -1,7 +1,6 @@
 import pandas as pd
 import plotly.express as px
-import plotly.graph_objects as go
-import yfinance as yf
+
 
 def create_chart(data: pd.DataFrame, title: str) -> pd.DataFrame:
     """
@@ -10,6 +9,7 @@ def create_chart(data: pd.DataFrame, title: str) -> pd.DataFrame:
     fig = px.line(data, x=data.index, y="Close", title=title)
     return fig
 
+
 def plot_comparison_chart(df):
     """
     Generate comparison line chart for multiple stocks.
@@ -17,16 +17,16 @@ def plot_comparison_chart(df):
     """
     if df.empty:
         return None
-    
+
     fig = px.line(
-        df, 
-        title="Stock Price Comparison", 
-        labels={"value": "Percent Change", "variable": "Stock"}
-        )
-    
+        df,
+        title="Stock Price Comparison",
+        labels={"value": "Percent Change", "variable": "Stock"},
+    )
+
     for stock in df.columns:
-        last_date = df.index[-1] # last date available
-        last_value = df[stock].iloc[-1] # last percent change available
+        last_date = df.index[-1]  # last date available
+        last_value = df[stock].iloc[-1]  # last percent change available
 
         fig.add_annotation(
             x=last_date,

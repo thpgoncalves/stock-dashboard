@@ -1,25 +1,25 @@
 # Stock Dashboard 📈
 
-Welcome to **Stock Dashboard**! This project aims to offer near real-time visualization of stock data for tickers of your choice. The application displays the current price, percentage change, and interactive charts to help you understand price trends. You can use this application locally and edit it to reflect the assets you want to monitor or evaluate new assets. Have your personal stock dashboard available wherever you are just clone the repository and run streamlit. 
+Welcome to **Stock Dashboard**! This project aims to offer near real-time visualization of stock data for tickers of your choice. The application displays the current price, percentage change, and interactive charts to help you understand price trends. You can use this application locally and edit it to reflect the assets you want to monitor or evaluate new assets. Have your personal stock dashboard available wherever you are just clone the repository and run streamlit.
 
---- 
+---
 
 ## Application Tabs
-### Dashboard Tab View 
+### Dashboard Tab View
 ![Stock Dashboard Screenshot](./src/stock_dashboard.png)
 
-### Comparison Tab View 
+### Comparison Tab View
 ![Stock Comparison Screenshot](./src/stock_comparison.png)
 
 ---
 
-## 🚀 Your Personal Stock Dashboard – Fast, Easy, and Always Accessible! 📈  
+## 🚀 Your Personal Stock Dashboard – Fast, Easy, and Always Accessible! 📈
 
-Stay ahead of the market with **your own real-time stock dashboard**! Monitor any asset you choose, track live price updates, and visualize trends effortlessly – all from **any computer, anywhere**.  
+Stay ahead of the market with **your own real-time stock dashboard**! Monitor any asset you choose, track live price updates, and visualize trends effortlessly – all from **any computer, anywhere**.
 
-With a sleek and interactive interface, this **plug-and-play dashboard** is designed for speed and convenience. No complex setups, no unnecessary steps – just **instant access to the financial insights that matter to you**.  
+With a sleek and interactive interface, this **plug-and-play dashboard** is designed for speed and convenience. No complex setups, no unnecessary steps – just **instant access to the financial insights that matter to you**.
 
-Whether you're keeping an eye on your portfolio or evaluating new opportunities, this tool is **fully customizable** to match your needs. Run it locally or deploy it to track your favorite stocks, BDRs, and ETFs with just a few clicks!  
+Whether you're keeping an eye on your portfolio or evaluating new opportunities, this tool is **fully customizable** to match your needs. Run it locally or deploy it to track your favorite stocks, BDRs, and ETFs with just a few clicks!
 
 ---
 
@@ -30,7 +30,7 @@ Whether you're keeping an eye on your portfolio or evaluating new opportunities,
 - **Fully customizable – monitor what matters to you**
 - **Lightweight & fast – access it from anywhere**
 
-Start **making smarter decisions with real-time data, all in one place.** 🚀  
+Start **making smarter decisions with real-time data, all in one place.** 🚀
 
 ## Description
 
