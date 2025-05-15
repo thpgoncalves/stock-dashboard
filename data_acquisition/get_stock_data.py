@@ -23,7 +23,6 @@ def get_comparison_data(tickers: str | list[str], period="1mo", interval="1d"):
 
     for ticker in tickers:
         try:
-            time.sleep(1.5)  # Delay entre chamadas
             stock = yf.Ticker(ticker)
             stock_data = stock.history(period=period, interval=interval)["Close"]
 
