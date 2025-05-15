@@ -11,8 +11,8 @@ from data_processing.process_stock_data import calculate_percente_change
 
 st.set_page_config(layout="wide")
 
-# update the grafics every 60s
-st_autorefresh(interval=60 * 1000, key="data_refresh")
+# update the grafics every 5min
+st_autorefresh(interval=5 * 60 * 1000, key="data_refresh")
 
 # refresh tester
 # if "refresh_count" not in st.session_state:
